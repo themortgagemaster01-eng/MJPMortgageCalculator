@@ -1,144 +1,615 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mortgage Calculator · MJ Pastor Realty</title>
-<meta name="theme-color" content="#0d1f33">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0e141d">
 <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="MJ Mortgage">
-<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAF80lEQVR4nO2dsW4cNxRFaUEuU6UxDARuU6RLlcaf4iIf5iKfkiY/4MJtECBwky+QILgYgxnP7pvlcki++zjnwIUBe1ecyzOXpKTdffXDu18TFPDw+LrugS/PT21HMoxH7wEoUu1B+bOFMAY5UmptQ8VX1HTl1HKMd8Iij0TKktPJoSPEVdbDcxflRHKIa3HJMmBHReaXI5wTGxxXnJnliK7FhvFFMqEckzmxYWSRTCXH3FpsGFAkk8hxKi3WdFUkvByn1WJNJ0Ue2j7dYDBjTfM0ojYHWlylbYWEbA7M2KdVPsGaAy0KaVIhkZoDM+7lYGIxmgMtqjlSIQGaAzOOU5ehuhyY0YqKJHWXFbRozr1LjGhzYEY/yrNVlAMzelOYsJwcmDGGkpy15MCMkdxMW0gOzBjPfuYqcmCGFzvJS8iBGb5Y+fvLgRkKXJ0FZzkwQ4fLufCUAzPU2MyImxyYocl6XnzkwAxl8uw4yIEZ+ixz5H9aAVlGy0FtROHh8fVQOfTN+Pvjj95DEGKcHFHMwI8Me45vrJ3Aj4VXY95qUrk2dlR49/t/I0eixojmCGrGzX+dnlMvKyVzf2Y/usshWxvls35aP/rKMYEZd/3/l+en9Z+qoQlxxmWlrgluPurShuh+dDytCNZGkwXi6hEme3D5hm6CORTSqzkEE2m1ddh5nu9+3q2XwL2cZVlpu6ncPNtSEld+k8r7LYgP0kUOtZumx3HjDEeY+Zuj3yxO70d7OaRqo/f8ze1H+9OKiByDp+2nD1+S8RE7IoFU0Lg5RILwuqHXe8+4+9DMhHsOFzP++ePN8pfNt0dF7pY6ZpPDcROQ/ciENiO13XO4ZyGyPZzmt0DmaQ4RM5LSSA7SrDkca0N2MqJXSPjmkDUjaY+thNhy6KevP8Id2sjhsqZEyT3KOC+J2hyxEo812kyDDeng2gga9EKsLWqw5ghtRoo2/khyxErWItBVhJEjUKY3iXItR+UYs+GIkmY5Ia4oQHOEyLEC/es6elrp2hz68TVB9ghzqDkwowmyVyq6rMjm1QnN61WUQzOp3ghetZwcghkNQ+3ateRQS2c8UgnUn1ba7kalQlFA4Qgj0RyYcYlCJv5yKKSgiXsyznK4X784vvl4yoEZJTim5CYHZpTjlZXDaQUtqhl8hKlsDsxwYXB6Q5cVzDjOyAwrl5Vhv1T876c/x3whL97+8t57CCb+3+fYYXozkvY16sqhnFpbZK9UVA7ZvDqheb2icoACyAEmyAEmyAEmyAEmyAEmyAEmyAEmyAEmyAEmyAEmyAEmyAEmlXJM8GEicBOaA0yQA0yQA0wevQfgw5uff7v3IV8+/9VjJMqcsTkqzKh+VGjOKAcUUi8Hp9npoTnABDnABDnABDnA5JAc7EnnhuYAE+QAk6NysLJMDM0BJsgBJsgBJg3kYNsxKzQHmLSRg/KYEpoDTJADTJrJwcoyHzQHmLSUg/KYDJoDTJADTBrLwcoyEzQHmLSXg/KYBpoDTLrIQXnMAc0BJr3kOFgeyp981gPN6+3YHPhRiOyVSi8rnVKrexuWTm/eImtGOvKJ1IUM+5BRaE735uDkEhfpZQV8GSEH5RGUQc2BHxFhWQGTcXJQHuEY2hz4EYvRywp+ROHl+Yk9B5g4yEF56LPMkU9z4IcyeXbclhX80GQ9L557DvxQYzMjzhtS/NDhci78Tyv4ocDVWfCXI+GHN1b+EnIk/PBjJ3kVORJ+eLCfuZAcCT/GcjNtLTkSfoyiJGc5ORJ+9KcwYUU5En70pDxb3Q8d/vazH17Z0I57bznR5shQIa2oSFJdjoQfLajLUHdZWcMSU82RWytAc2SokHs5mFiM5shQIYU0uZEiNUeGCtmnVT7BmiNDhVyl7W0TsjkyVMia5mlEbY4MFZK63STh5Vg4rSJdu3MSORZOpciAJXUqORb+f9nFjJaM3GZNKEdmsiIZv/ueWY6F6EXieCKbX45MuCJxP6ifSI6F717upyeKuxBrTifHGp0VR8qJzKnlyGxfI9rfFU0bNnwFqQASajNaUjsAAAAASUVORK5CYII=">
-<link rel="icon" href="data:image/png;base64,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">
-<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%20%22MJ%20Pastor%20Realty%20Mortgage%20Calculator%22%2C%20%22short_name%22%3A%20%22MJ%20Mortgage%22%2C%20%22start_url%22%3A%20%22.%22%2C%20%22scope%22%3A%20%22.%22%2C%20%22display%22%3A%20%22standalone%22%2C%20%22background_color%22%3A%20%22%230d1f33%22%2C%20%22theme_color%22%3A%20%22%230d1f33%22%2C%20%22icons%22%3A%20%5B%7B%22src%22%3A%20%22data%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAGeElEQVR4nO2dO24cRxRFS8QwVOSEMGAwdeBMgAEl3oM34EALc6ANeA9ODDh24NQQYCjRCkgQDlpoD%2BfbU68%2B91adAwYEwZ6pfu/0rdcjcebN28d3CXK5293nHfjy/FR2Jb3Y9V6ADdmubH80R6sQ6Cxljcl4RgufEOgV7aW5wP5iZGVCIC1pziEr07wCWXhzknXlCibNKJCvOgcsJ9JXo4kEGsabA/oG0hQCjarOAV0CaXCBJlFnn8YaDSvQhOrs00yjAQWaXJ19Gmg0lECoc5KqGg0iEOpcpZJGd2UfrgvYs53itfJOINTJoGwUGScQ9kQoVT3LBEKdIhSJIr8Ewp6yBOtpJhD21CBSVZstDHWqkr2deSQQ9rQho84GAmFPS26ttrpA2NOem2quOwOhTke2j0SiCYQ9CmzpgqJA2KPD1V7ICYQ9alzuiJZA2KPJhb4ICYQ9ypzrjopA2KPPyR5JCIQ9Lhx3qr9A2OPFQb/6CwTWdBaI%2BHFkv2s9BcIeX9bedRMIe9xZOthHIOwZg7vdPUP0Ff759ZveS5Cmg0BG8bPYg0MXaC2QnT3H38M%2BTQUytefcTyCl9KblO9VbCHRVlMcPX9qsxIJ2CTSGPRt/Zx4aCTSMPbf%2B5vBwG/%2BVW53AoYUWAunHT54N2496eX5avzKeSJnqAo1qz8Zjj6UZTKPqd2HKApXahs7dl62inPykC%2BXKbKeuQMo1Kj7EHGu0uHJchHM/d2TSIbrGCHzwmBcsUfiMi1JUFEj2Cqt3AzXhrdl0CVS7x7M5VEsgzfhp092pHKo1RKsJ1L6pjx%2B%2BMETnPqhYabpEwvqkx68DtV9MPcafgTpuKJ8%2BPizfHL8SrXaNZVN%2BC5Mqjcg48t0vn9fvpeoTZ%2BQEErEnpfTp48Pd7n756r2WwhQWSKdAOvYsqK2nFIW3MAWBlFs13v9mHG0LU7YnyS8vg5ICdY8fi/ZYLHI74ySQUWOMlnqVYjNQ3/gxbckAI9EICWRqT3Je%2BYq9QO49cF9/mS2sy/7lXvp9fPcy1wQayZ7kfDqWAvmW%2BwKmJ%2BUnkGmht%2BB4agVmoJYDkGOJMzAaiZwSaBJ7ktWZeiSQUUELYpFDBgk0pz3J5MSjAtWOH4si1kP/9KUTSL98DRAvgq5A4oVriXIpokN0pS1MuWQdERyr5QRCncuoORTawrCnPWolEpqB1Eoji1ShVASSKoo%2BOuWSEEinHEaIFK2/QCKFcEShdKG7sOAQrXD%2BY9Dx1qxbAmFPQToWM1%2BgSPxgT3F6lTR/C8sWKPtU73/8Le9AR57%2B/DnjqPZ7WQeB8vj3r99bPp0C3/7wU%2B8lXKf/XdgWJrQnmZy1gUAWdayE/rkbCATKIBCEQCAIgUAQAoEgBAJBCASCEAgEIRAIQiAQhEAgCIFAEAKBIAQCQYh8gQb76EbIgwSCEAgEIRAIQiAQhNj1XoAED9%2B/zzvw899/lF2JHSRQvj3BY8cgJBB38kACQQgEghAIBCEQCEJEBWKOnhwSCEIgEIRAIAhRQCDGoJkhgSAEAkEIBIIQZQRiDJoWEghCIBCEKCYQu9ickEAQoqRAhNCEkEAQAoEgRGGB2MVmgwSCEOUFIoSmggSCEFUEIoTmgQSCELUEIoQmgQSCEBUFIoRmgASCEHUFKhJCFp9%2BXQn9c/dIIP061sDirKsLVGoSqlfNyNvU1XuLOwt7Ukpv3j6%2Ba/A0d7v7Bs8C7fHYwkCWRgJxSz8q7RIIh4aELQxCNBWIEBqP1gmEQ4PRYQvDoZFgBoIQfQQihMbg5fmpWwLhkDtLB3tuYTjky9q7zjMQDjmy3zWGaAjRXyBCyIuDfvUXKOGQD8edkhAo4ZADJ3ukIlDCIW3OdUdIoIRDqlzoi5ZACYf0uNwROYESDilxtReKAiUc0mBLF3YN1pHH139q4c85erD9AhZNoBWiqD031VxdoIRDbbm12gYCJRxqRUaddWegAxiJqpJ9iXok0ApRVINIVc0ESjhUmmA9bbawfdjOilDkUvRLoBWiKEKp6lkm0ApRlEHZC884gVaIou0Ur5V3Aq0QRVepdJkNItACGp2kakIPJdACGq002NwHFGhhco2azYXDCrQwoUaNbykGF2hhEo263I1OIdDC/3/OPZZJfV/FmEiglWECSeEFsBkFWvANJAVvVuYVaOXVe02oyiQlzT4I9AopmWSl2QeBznL4NhT1fbIw5oD/ANlpRAJ6znrEAAAAAElFTkSuQmCC%22%2C%20%22sizes%22%3A%20%22192x192%22%2C%20%22type%22%3A%20%22image/png%22%2C%20%22purpose%22%3A%20%22any%20maskable%22%7D%2C%20%7B%22src%22%3A%20%22data%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAAAS20lEQVR4nO3dPbIkR9UG4NbEjCkLh8AZFwNPFg6LYWEsBocNYODiEDisQArFZ/R8V3f6p251VVbl%2BXmeGAtJQ83tzPetk9mgH378%2BtMFON6nz1%2BO%2B81//eXn435zqvo8%2BwGggkPDfdQDKAluKAB4wfSg3%2BPZwyuGthQAPJY661/y8E%2BqFTpQAPBNn8Rf4%2BanoQ9KUgD0JfHX0wclKQAakfij6IMaFADFCf0TvP8hK4NEFAAFCf2JlEEiCoAihH5AyiA4BUBucj%2BLt09KE8ShAEhJ7uelCeJQAKQh9ItxQDSdAiA6ud%2BBsWAKBUBcor%2Bh64euBs6hAAhH7mMgOIcCIAq5zz1NcCgFwGRynzU0wREUANOIfjZwSTCQAmAC0c9OamAIBcB55D5jORfaSQFwBtHPoQwE2ygAjiX6OY0aeJUC4BByn1mcC62nABhM9BOEgeBDCoBhRD8BqYEFCoABRD/BqYGHFAC7iH4SUQM3FAAbiX6SUgNvFAAvE/0UoAYuCoCXiH6KaV4DCoBVRD%2BFta2BT7MfgASkPx00XOcmAJY03BJ01m0UUAA8Jvppq08NKABuiX649KgBdwB8R/rDe7V3hAmAb2ovdNis8CigABD98LGSNeAIqDvpD%2BsV2y8mgL6KLWU4R6VRwATQlPSHPWrsIBNAOzUWLkxXYBQwAfQi/WGs1HvKBNBF6mUKkeUdBUwALUh/OFrGXWYCKC7jooSk0o0CJoDKpD%2BcL9G%2BUwBlJVqFUEyW3ecIqKAsiw8KS3EcZAKoRvpDHMH3owIoJfhqg4Yi70pHQEVEXmTQXNjjIBNABdIf4gu4TxVAegFXFfBQtN3qCCixaIsJ%2BFCo4yATQFbSH/IKsn8VQEpBVg%2BwWYRdrADyibBugP2m72V3AJlMXy7AWHOvBEwAaUh/qGrW7lYAOUh/qG3KHlcACUh/6OD8na4AopP%2B0MfJ%2B10BhCb9oZszd71vAQUl%2BqGt074aZAKISPoDJ%2BSAAghH%2BgNXR6eBAohF%2BgPvHZoJCiAQ6Q/cOy4ZFEAU0h945qB8UAAhSH9g2REpoQDmk/7AGsOzQgFMJv2B9cYmhgKYSfoDrxqYGwpgGukPbDMqPRTAHNIf2GNIhiiACaQ/sN/%2BJFEAZ5P%2BwCg780QBnEr6A2PtSRUFcB7pDxxhc7YogJNIf%2BA42xJGAZxB%2BgNH25AzCuBw0h84x6tpowCOJf2BM72UOQrgQNIfON/65FEAAE0pgKN4/QdmWZk/CuAQ0h%2BYa00KKYDxpD8QwYdZpAAGk/5AHMuJpABGkv5ANAu5pACGkf5ATM/SSQEANKUAxvD6D0T2MKMUwADSH4jvPqkUwF7SH8jiJq8UwC7SH8jlfWopAICmFMB2Xv%2BBjN6ySwFsJP2BvK4JpgC2kP5Adp8%2Bf1EAtPbvv/1u9iPANArgZV7/y7imvw6gLQXwGulfxvvc1wH0pABeIP3LuE98HUBDP/z49afZz5CGAijgw6D/%2Btf/nfMkMJ0JYC3pX8Ca13yjAH0ogFWkfwHrk10H0IQC%2BJj0L%2BDVTNcBdKAAqG9bmusAylMAH/D6n92eHNcB1OZbQEukf2oD49tXgyjJBEBNY1/ejQKUpACe8vqf1xF5rQOoRwE8Jv3zOi6pdQDFKABKOTqjdQCVKIAHvP4ndU466wDK8C2gW9I/o/ND2feCKEAB3FIA6Ux8JVcDpOYI6DvSP525BzKOg0hNAfxG%2BqcTIX8jPANsowDIKk7yznqSX3/5%2Bf7XlCchKQXwjdf/XOKk/9WZz7Oc9ZqA9RQA%2BURL/6sTnuqlZFcDfMi3gC4Xr/95xIz%2B9477XtDmNLe8eUYB2B5pxE//N8NrYOe7vEXOQ46AyCFR%2Bl9GP%2B3%2BkxxnQTzUvQC8GaWQK/2vRj3zQnZ/%2Bvzl/teG34e2uhcA8WVM/6v9T/4stReyfuEv6QButC4Ar//x5U3/qyOef826tbZZo/UlsE0SWfbof2/bnfDDF/aXFu3%2B34Ha%2BhaAbRBZpfR/82oN3Mf3hkU75DehqqZHQPZAZCXT/1L3z0VeTQuAsGqn5Po/3XEXtq6CedOxALz%2Bh1U7/a82/xm3rVurnQUdC4CYOqT/VZ8/KcG1uwT2QhRQz0BcvhMeeHnrHphnTABM1jP9L43/4MTRawLw4hONELw8GQVMAJzABMA00v/Kz4FZGhWAt55QpN57a34a276%2B6UufLGhUAMQh/e/d/EyOe1/xJsSbLgVg0cch/Z/xk%2BFkXS6BFUAEAm6Ntzth/2dwHK3FBGDFRyD9V3r7QT1cty/9S%2BHv/0N7gfdaTAAW/XTSf4Ovf/3fwr8QZvmf3fwP0kr9CcCKn076b/Pvv/1u4d/t9SziF/6SvcCN%2BgXAXNJ/j4UOuPx/1t/8evY3S3/uFS8Ai34u6b/fcgesZCPwUPE7AOt%2BFtE/1sJ9wIfsAp4pPgEwhfQfbvMcIP1ZUHkCsPSnkP6HWj8KWP98yATASNL/aNdR4Prr4d%2Bw/FfhvbIFYAOcT/qf4/3/Uuz%2B19xnI5eyBcDJpP%2BZ/LQZouYdgPegMwmjWZb/pZLwIRMAu0j/ifzw2UkBsJ0Ams5HwB4Fj4Cc/5xD9ITiOIgNTABsIf2j8YmwQbUC8Pp/AlkTk8%2BFV1UrAI4mZSLz6fCSUncAXv8PJVyycB/ASiYAVpH%2BifiwWEkB8DGBko6PjDXqHAE5/zmIKEnNcRALTAAskf7Z%2BQRZoAB4SnbU4HPkmSJHQM5/xhIZ9TgL4p4JgFvSvyQfK/cUAN8RE4X5cLlR4QjI%2Bc8oAqIJx0FcmQD4Rvr34bPmKn0BeP0fQiJ04xPnUuAISAHsJAg6cxbUXPoJgD2kf3MWQHO5C8Dr/x42PxfLoLfcBcBmtj1vLIa2ct8BmAC2seF5yJVANyaAdqQ/z1gb3SQuAK//G9jhLLNCWkl8BKQAXmJjs56zoCYSTwCsJ/15iQXTRNYC8Pq/ns3MBpZNB1kLgJVsYzazeMrLegdgAljDBmYIVwJVpZwApP8a0p9RrKWqUk4ACmCZ7coRzAH1pJwAWCD9OYilVY8CKMUW5VAWWDH5CsD5zzM2JyewzCrJdwegAB6yLTmZK4EC8k0A3JP%2BnM%2BqK8AEkJtNyFzmgNSSTQDS/z3pz3QWYWrJCoA3Nh5BWIp5KYCUbDlCsSCTUgD52GwEZFlmlOkS2AXAxTYjPNfCiZgAMpH%2BxGeVJmICyMGmIhdzQAomgASkP%2BlYtCkogOhsJJKydONLUwA9z39sIVKzgINLUwAN2TwUYBlHluYSuNsEYNtQjGvhgBRAOKKfqnRANI6AYpH%2BFGZ5R5OjAJq8/tselGeRh5KjADqwMWjCUo9DAYRgS9CKBR9Ejkvg2kdANgNtuRaeSwHMJPpBB0yU4AhI%2BkNhNsJECQqgJIse3tgOsyiACSx3uGFTTKEAzmahw0O2xvkUwKkscVhgg5wswbeAylwCW9ywkq8GnUMBnEH0w6t0wAmiHwFJf%2BjJxjlB9ALIziKGzWyfoymAA1m%2BsJNNdCgFcBQLF4awlY6jAA5hycJANtRBon8LKN0lsJUKx/HVoLFMACNJfziULTaWAhjG0oQT2GgDhS6AROc/FiWcxnYbJXQBZGE5wslsuiEUwF4WIkxh6%2B0X%2BltAwY%2BArD%2BIwFeDNjMBbCT9IQibcTMFsIUFB6HYktsogJdZahCQjbmBO4Bq/vPPv89%2BBCr7w5/%2BMvsRGEYBFCH3OZkmKEABpCf6mUgNpOYOIDfpz1xWYGoKIDF7jwisw7ziFoDzn2V2HXFYjUnFLQAW2G9EY01mpADysdOIycpMRwEANKUAkvGSRWTWZy4KAKApBQDQlALIxHxNfFZpIgoAoCkFANCUAgBoSgEANKUAAJpSAABNKQCAphQAQFMKAKApBQDQlAIAaEoBADSlAACaUgAATSkAgKYUAEBTCgCgKQUA0JQCAGhKAQA0pQAAmlIAAE0pAICm4hbAr7/8PPsRACqLWwAAHEoBADSlAACaUgAATSkAgKYUAEBTCgCgKQUA0JQCAGhKAQA0pQAAmgpdAP7vgACOE7oAADiOAgBoSgEANKUAAJpSAABNKQCAphQAQFPRC8D/FADgINELAICDKACAphQAQFMKAKCpz7MfALb7/R//PPsRLpfL5b//%2BsfsR4AtTABkFST9L5GeBF6SoAB8E5R70TI32vPAGgkKAG7ETNuYTwULFADJRM7ZyM8G9xQAQFMKAKCpHAXgHhhguBwFAMBwCgCgKQUA0JQCAGgqTQG4BwYYK00BADCWAgBoSgEANKUAAJrKVADugQEGylQAAAykAACaUgAATSUrANcAAKMkKwAARlEAAE0pAICm8hWAawCAIfIVAABDKACAphQAQFMpC8A1AMB%2BKQsAgP0UAEBTWQvAKRDATlkLAICdFABAU4kLwCkQwB6JCwCAPRQAQFMKAKCp3AXgGgBgs9wFAMBmCgCgqfQF4BQIYJv0BQDANhUKwBAAsEGFAgBgAwUA0FSRAnAKBPCqIgUAwKsUAEBTdQrAKRDAS%2BoUAAAvUQAATZUqAKdAAOuVKgAA1qtWAIYAgJWqFQAAKxUsAEMAwBoFCwCANRQAQFM1C8ApEMCHahYAAB8qWwCGAIBlZQsAgGWVC8AQALCgcgEAsEABADRVvACcAgE8U7wAAHimfgEYAgAeql8AADzUogAMAQD3WhQAAPe6FIAhAOBGlwIA4EajAjAEALzXqAAAeK9XARgCAN70KgAA3rQrAEMAwFW7AgDgqmMB5B0C/vCnv8x%2BBPiAVZpIxwIA4NK2APIOAQCjNC2AS9oOMF8TmfWZS98CAGiudQEYAmAgKzOd1gWQl51GNNZkRt0LIOkQcLHfiMRqTKp7AaTWc9f991//mP0IT0V%2BtuP0XIc1KIDEQ8Cl696LmbMxn%2BpoPVdgGT/8%2BPWn2c8QwqfPX2Y/wi7/%2BeffZz/C2X7/xz/PfoTfNEx/0V%2BAAvgmewG8adUEQTqgVfrL/UoUwG/KdADAGu4AAJpSAL9JfRsM8CoF8B0dAPShAACaUgC3DAFAEwrgAR0AdKAAAJpSAI8ZAoDyFMBTOgCoTQEANKUAlhgCgMIUwAd0AFCVAgBoSgF8zBAAlKQAVtEBQD0KYC0dABSjAACaUgAvMAQAlSiA1%2BgAoAwF8DIdANSgAACaUgBbGAKA7H795WcFsJEOAPK6JpgC2E4HABm9ZZcCAGhKAexiCAByeZ9aCmAvHQBkcZNXCmAAHQDEd59UCmAMHQBE9jCjFABAUwpgGEMAENOzdFIAI%2BkAIJqFXFIAg%2BkAII7lRFIA4%2BkAIIIPs0gBHEIHAHOtSSEFcBQdAMyyMn8UAEBTCuBAhgDgfOuTRwEcSwcAZ3opcxTA4XQAcI5X00YBnEEHAEfbkDMK4CQ6ADjOtoRRAOfRAcARNmeLAjiVDgDG2pMqCuBsOgAYZWeeKIAJdACw3/4kUQBz6ABgjyEZogCm0QHANqPSQwHMpAOAVw3MDQUwmQ4A1hubGApgPh0ArDE8KxRACDoAWHZESiiAKHQA8MxB%2BaAAAtEBwL3jkkEBxKIDgPcOzQQFEI4OAK6OTgMFEJEOAE7Igc9H/xewzfWz//T5y%2BwHAc522iugCSA0owB0c%2BauVwDR6QDo4%2BT9rgAS0AHQwfk7XQHkoAOgtil7XAGkoQOgqlm727eAMvHVIChm7oudCSAfowDUMH0vK4CUpq8bYKcIu1gBZBVh9QDbBNm/7gAScyUA6QSJ/isTQHqh1hOwINpuVQAVRFtVwL2A%2B9QRUBGOgyCsgNF/ZQIoJew6g7Yi70oFUE3k1QbdBN%2BPjoAKchwE0wWP/isTQFkp1h%2BUlGX3KYDKsqxCqCTRvnMEVJzjIDhNoui/MgG0kG5dQjoZd5kJoAujABwkY/RfmQB6ybtSIabUe8oE0I5RAIZIHf1XJoCmCqxdmKjGDjIB9GUUgA1qRP%2BVCaC7SqsZjlZsv5gAMArAx4pF/5UC4Bs1AA%2BVjP4rR0B8p/Bahw1q7wgTALeMAnCpHv1XCoDH1ABtdYj%2BKwXAEjVAK32i/8odAB/rtivoqeE6NwGwilGAwhpG/5UC4AVqgGLaRv%2BVAuBlaoACmkf/lQJgIzVAUqL/jQJgFzVAIqL/hgJgADVAcKL/IQXAMGqAgET/AgXAYGqAIET/hxQAh3jbe5qAk8n99RQAxzIQcBrR/yoFwBnUAIcS/dsoAM7jXIix5P5OCoAJDATsJPqHUABMowbYQPQPpACYzLkQa8j9IygAotAE3JP7h1IAhKMJkPvnUADE5ZKgIdF/JgVAdAaCDuT%2BFAqANN5nhDIoQOhPpwBIyViQl9yPQwGQmybIQu4HpAAowgFRQEI/OAVAQcpgIqGfiAKgOGVwAqGflAKgkZuc0gebSfwaFAB96YP1JH5JCgC%2B0QfvSfwOFAA89jABS7aCrG9LAcALnmVlimIQ9Nz4PxYWEoI3SydFAAAAAElFTkSuQmCC%22%2C%20%22sizes%22%3A%20%22512x512%22%2C%20%22type%22%3A%20%22image/png%22%2C%20%22purpose%22%3A%20%22any%20maskable%22%7D%5D%7D">
+<meta name="apple-mobile-web-app-title" content="MJP Mortgage">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Mortgage Calculator · MJ Pastor Realty × Movement Mortgage</title>
+<meta name="description" content="Estimate your monthly mortgage or refinance payment with PMI, taxes, insurance and HOA. Financing by Robert A. Castro Sr., Movement Mortgage (NMLS #66194).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
-:root{--navy:#0d1f33;--navy2:#13314f;--gold:#f0c14b;--ink:#0d1f33;--mut:#5b6b80;--line:#e3e9f0;--bg:#f4f7fb}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--ink);
- padding-bottom:env(safe-area-inset-bottom)}
-header{background:linear-gradient(160deg,var(--navy),var(--navy2));color:#fff;padding:calc(22px + env(safe-area-inset-top)) 22px 26px;text-align:center}
-.brand{font-weight:800;font-size:1.32rem;letter-spacing:.5px}
-.brand .gold{color:var(--gold)}
-.brand small{display:block;font-weight:500;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:#aebfd6;margin-top:4px}
-.h-sub{margin-top:6px;font-size:.92rem;color:#cdd9ea;font-weight:400}
-.wrap{max-width:520px;margin:0 auto;padding:18px 16px 40px}
-.pay-card{background:linear-gradient(160deg,var(--navy),var(--navy2));color:#fff;border-radius:22px;padding:24px;text-align:center;margin:-44px 0 18px;box-shadow:0 18px 40px -16px rgba(13,31,51,.5)}
-.pay-card .lbl{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#aebfd6}
-.pay-card .amt{font-size:3rem;font-weight:800;line-height:1.05;margin:4px 0}
-.pay-card .amt small{font-size:1rem;font-weight:500;color:#cdd9ea}
-.bar{display:flex;height:12px;border-radius:8px;overflow:hidden;margin:14px 0 12px;background:#1c3b5c}
-.seg{height:100%}
-.legend{display:flex;flex-wrap:wrap;gap:10px 16px;justify-content:center;font-size:.82rem}
-.legend span{display:flex;align-items:center;gap:6px;color:#dce6f3}
-.dot{width:10px;height:10px;border-radius:50%}
-.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 6px 18px -12px rgba(13,31,51,.2)}
-.field{margin-bottom:16px}
-.field:last-child{margin-bottom:0}
-label{display:flex;justify-content:space-between;font-size:.84rem;font-weight:600;color:var(--mut);margin-bottom:7px}
-label .v{color:var(--navy);font-weight:700}
-.inp{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding:0 14px;background:#fafcff}
-.inp:focus-within{border-color:var(--gold)}
-.inp .pre{color:var(--mut);font-weight:600}
-.inp input{border:0;outline:0;background:none;padding:13px 8px;font-size:1.08rem;font-weight:600;color:var(--ink);width:100%;font-family:inherit}
-input[type=range]{width:100%;accent-color:var(--gold);margin-top:4px}
-.seg-toggle{display:flex;gap:8px}
-.seg-toggle button{flex:1;border:1.5px solid var(--line);background:#fafcff;border-radius:12px;padding:11px;font-weight:700;font-family:inherit;font-size:.96rem;color:var(--mut);cursor:pointer}
-.seg-toggle button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.cta{display:block;background:var(--gold);color:var(--navy);text-align:center;font-weight:800;padding:16px;border-radius:14px;text-decoration:none;font-size:1.05rem;margin-top:4px}
-.cta small{display:block;font-weight:500;font-size:.8rem;color:#5a4a14;margin-top:2px}
-.lo{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:14px}
-.lo .av{width:46px;height:46px;border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;flex:none}
-.lo .n{font-weight:700}.lo .d{font-size:.82rem;color:var(--mut)}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.disc{font-size:.72rem;color:#90a0b5;text-align:center;margin-top:18px;line-height:1.5}
-.tip{font-size:.72rem;color:var(--mut);margin-top:7px}
-</style></head><body>
-<header>
-  <div class="brand">MJ Pastor <span class="gold">Realty</span><small>Mortgage Calculator</small></div>
-  <div class="h-sub">Estimate your monthly payment in seconds</div>
-</header>
-<div class="wrap">
-  <div class="pay-card">
-    <div class="lbl">Estimated Monthly Payment</div>
-    <div class="amt" id="total">$0</div>
-    <div class="bar" id="bar"></div>
-    <div class="legend" id="legend"></div>
-  </div>
+  :root{
+    --bg0:#070a0f;--baby:#bcdcf5;--baby-mid:#8cbce6;--baby-deep:#5a96cc;
+    --grey:#8893a4;--grey-soft:#c7d0dc;
+    --line:rgba(140,188,230,0.22);--line-bright:rgba(188,220,245,0.40);
+    --glass:rgba(255,255,255,0.055);--glass-hi:rgba(255,255,255,0.10);
+    --pi:#6fa8d6;--ins:#7fc7b6;--tax:#e08c9a;--hoa:#e0c084;--pmi:#b89cdb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    min-height:100vh;color:#eaf1f8;position:relative;overflow-x:hidden;background:var(--bg0);
+    display:flex;flex-direction:column;align-items:center;padding:34px 16px 56px;}
+  /* PHOTO BACKGROUND */
+  body::before{content:"";position:fixed;inset:-10px;z-index:-3;background-attachment:fixed;
+    background:url('background.jpg') center/cover no-repeat;}
+  body::after{content:"";position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(ellipse 70% 60% at 12% 8%, rgba(40,90,160,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 92% 18%, rgba(60,110,180,0.10) 0%, transparent 50%),
+      linear-gradient(160deg,rgba(7,10,15,0.48) 0%,rgba(10,16,26,0.34) 45%,rgba(7,10,15,0.58) 100%);}
+  .stage{width:100%;max-width:940px;display:flex;flex-direction:column;align-items:center}
 
-  <div class="card">
-    <div class="field">
-      <label>Home Price <span class="v" id="priceV">$500,000</span></label>
-      <div class="inp"><span class="pre">$</span><input id="price" type="text" inputmode="numeric" value="500,000"></div>
-    </div>
-    <div class="field">
-      <label>Down Payment <span class="v" id="downV">20% · $100,000</span></label>
-      <input id="down" type="range" min="0" max="50" step="1" value="20">
-    </div>
-    <div class="field">
-      <label>Loan Term</label>
-      <div class="seg-toggle" id="term">
-        <button data-y="30" class="on">30 yr</button>
-        <button data-y="20">20 yr</button>
-        <button data-y="15">15 yr</button>
-      </div>
-    </div>
-    <div class="field">
-      <label>Interest Rate <span class="v" id="rateV">6.75%</span></label>
-      <div class="inp"><input id="rate" type="text" inputmode="decimal" value="6.75"><span class="pre">%</span></div>
-    </div>
-    <div class="row2">
-      <div class="field">
-        <label>Property Tax / yr</label>
-        <div class="inp"><span class="pre">$</span><input id="tax" type="text" inputmode="numeric" value="9,000"></div>
-      </div>
-      <div class="field">
-        <label>Home Insurance / yr</label>
-        <div class="inp"><span class="pre">$</span><input id="ins" type="text" inputmode="numeric" value="1,500"></div>
-      </div>
-    </div>
-    <div class="field">
-      <label>HOA / month</label>
-      <div class="inp"><span class="pre">$</span><input id="hoa" type="text" inputmode="numeric" value="0"></div>
-      <div class="tip" id="pmiTip"></div>
-    </div>
-  </div>
+  .agent-bar{width:100%;background:linear-gradient(135deg,var(--glass-hi),var(--glass));
+    backdrop-filter:blur(28px) saturate(150%);-webkit-backdrop-filter:blur(28px) saturate(150%);
+    border:1px solid var(--line);border-radius:24px;padding:18px 24px;display:flex;align-items:center;gap:18px;
+    box-shadow:0 10px 50px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.10);margin-bottom:22px;position:relative;overflow:hidden;}
+  .agent-bar::before{content:"";position:absolute;top:-40%;right:-10%;width:240px;height:240px;
+    background:radial-gradient(circle,rgba(140,188,230,0.18),transparent 70%);pointer-events:none;}
+  .agent-photo{width:70px;height:70px;border-radius:18px;flex-shrink:0;overflow:hidden;
+    border:1px solid var(--line-bright);background:#1b2330;box-shadow:0 6px 20px rgba(0,0,0,0.45);}
+  .agent-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
+  .agent-meta .eyebrow{font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--baby-mid);font-weight:600;margin-bottom:3px}
+  .agent-meta h1{font-family:'Sora',sans-serif;font-size:21px;font-weight:800;letter-spacing:-.4px;color:#fff;line-height:1}
+  .agent-meta .firm{font-size:12.5px;color:var(--grey-soft);margin-top:5px;font-weight:500}
+  .agent-meta .firm b{color:var(--baby);font-weight:700}
+  .agent-contact{margin-left:auto;text-align:right;font-size:12.5px;color:var(--grey);line-height:1.7;padding-top:30px}
+  .agent-contact a{color:var(--baby);text-decoration:none;font-weight:600;transition:color .15s}
+  .agent-contact a:hover{color:#fff}
 
-  <a class="cta" id="cta" href="tel:+19142663806">Get Pre-Approved<small>Free &amp; no obligation — see what you qualify for</small></a>
-  <div class="lo">
-    <div class="av">RC</div>
-    <div><div class="n">Robert Castro · Loan Officer</div>
-    <div class="d">Movement Mortgage · NMLS 66194 · (914) 266-3806</div></div>
-  </div>
+  /* MODE TABS */
+  .mode-tabs{display:flex;gap:8px;width:100%;max-width:340px;margin:0 auto 20px;
+    background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--line);border-radius:16px;padding:5px}
+  .mode-tabs button{flex:1;padding:11px 0;border:none;border-radius:12px;cursor:pointer;
+    background:none;color:var(--grey-soft);font-family:'Sora',sans-serif;font-weight:700;font-size:14px;transition:all .2s}
+  .mode-tabs button.on{background:linear-gradient(135deg,var(--baby-deep),var(--baby-mid));color:#fff;box-shadow:0 6px 18px rgba(90,150,204,0.45)}
 
-  <div class="disc">For estimation only. Not a loan commitment, approval, or offer to lend. Actual rates, taxes, insurance &amp; payments vary. Equal Housing Opportunity. Movement Mortgage, LLC NMLS #39179.</div>
+  .calc{width:100%;display:grid;grid-template-columns:1.04fr 0.96fr;border-radius:32px;overflow:hidden;
+    box-shadow:0 30px 90px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.08);border:1px solid var(--line);}
+  .inputs{background:linear-gradient(150deg,var(--glass-hi),var(--glass));
+    backdrop-filter:blur(28px) saturate(150%);-webkit-backdrop-filter:blur(28px) saturate(150%);padding:32px 30px;}
+  .result{background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, rgba(90,150,204,0.20), transparent 60%),
+      linear-gradient(165deg,rgba(18,28,44,0.80),rgba(7,10,15,0.88));
+    backdrop-filter:blur(28px) saturate(150%);-webkit-backdrop-filter:blur(28px) saturate(150%);
+    padding:32px 30px;display:flex;flex-direction:column;border-left:1px solid var(--line);}
+  .sec-label{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px;color:var(--baby);text-transform:uppercase;margin-bottom:4px}
+  .sec-title{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;letter-spacing:-.6px;margin-bottom:22px;color:#fff}
+
+  .field{margin-bottom:20px}
+  .field.small{margin-bottom:16px}
+  .field label{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--grey-soft);font-weight:600;margin-bottom:8px;letter-spacing:.2px}
+  .field .pct{font-family:'Sora',sans-serif;color:var(--baby);font-weight:700;font-size:13px}
+  .field label > span:last-child:not(.pct):not(.dp-toggle){color:var(--grey);font-weight:500}
+  .dp-toggle{display:flex;gap:4px;background:rgba(255,255,255,0.05);border:1px solid var(--line);border-radius:9px;padding:2px}
+  .dp-toggle button{font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--grey);background:none;border:none;padding:3px 9px;border-radius:7px;cursor:pointer;transition:all .15s}
+  .dp-toggle button.on{background:var(--baby-deep);color:#fff}
+  .input-wrap{display:flex;align-items:center;background:rgba(255,255,255,0.05);border:1px solid var(--line);border-radius:15px;padding:12px 15px;transition:all .2s;}
+  .input-wrap.sm{padding:10px 14px}
+  .input-wrap:focus-within{border-color:var(--baby-deep);box-shadow:0 0 0 4px rgba(90,150,204,0.18);background:rgba(255,255,255,0.08)}
+  .input-wrap span.cur{color:var(--baby-mid);font-weight:700;margin-right:8px;font-size:16px}
+  .input-wrap input{border:none;background:none;outline:none;font-family:'Sora',sans-serif;font-size:19px;font-weight:700;color:#fff;width:100%}
+  .input-wrap.sm input{font-size:16px}
+  .input-wrap span.suffix{color:var(--baby-mid);font-weight:700;font-size:15px;white-space:nowrap}
+
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:5px;
+    background:linear-gradient(90deg,var(--baby-deep),var(--baby-mid)) no-repeat;background-size:var(--fill,40%) 100%;
+    box-shadow:inset 0 0 0 100px rgba(255,255,255,0.08);margin-top:14px;outline:none;cursor:pointer;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#fff,var(--baby) 70%);border:2px solid var(--bg0);cursor:pointer;
+    box-shadow:0 2px 10px rgba(140,188,230,0.7);transition:transform .12s}
+  input[type=range]::-webkit-slider-thumb:active{transform:scale(1.18)}
+  input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--baby);border:2px solid var(--bg0);cursor:pointer;box-shadow:0 2px 10px rgba(140,188,230,0.7)}
+
+  .terms{display:flex;gap:9px}
+  .terms button{flex:1;padding:13px 0;border:1px solid var(--line);border-radius:14px;cursor:pointer;
+    background:rgba(255,255,255,0.05);color:var(--grey-soft);font-family:'Sora',sans-serif;font-weight:700;font-size:15px;transition:all .18s}
+  .terms button:hover{border-color:var(--baby-deep);color:#fff}
+  .terms button.active{background:linear-gradient(135deg,var(--baby-deep),var(--baby-mid));color:#fff;border-color:transparent;box-shadow:0 6px 20px rgba(90,150,204,0.5)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  @media(max-width:560px){.grid3{grid-template-columns:1fr 1fr}}
+  .divider{height:1px;background:var(--line);margin:6px 0 18px}
+  .group-label{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--baby-mid);font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .group-label::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  .credit-select{display:flex;gap:6px;flex-wrap:wrap}
+  .credit-select button{flex:1;min-width:62px;padding:9px 4px;border:1px solid var(--line);border-radius:11px;cursor:pointer;
+    background:rgba(255,255,255,0.05);color:var(--grey-soft);font-family:'Sora',sans-serif;font-weight:700;font-size:12px;transition:all .15s}
+  .credit-select button.on{background:linear-gradient(135deg,var(--baby-deep),var(--baby-mid));color:#fff;border-color:transparent}
+
+  .donut-wrap{display:flex;justify-content:center;align-items:center;margin:6px 0 24px}
+  .donut{position:relative;width:230px;height:230px}
+  .donut svg circle.seg{transition:stroke-dasharray .6s cubic-bezier(.34,1.3,.4,1),stroke-dashoffset .6s cubic-bezier(.34,1.3,.4,1),stroke-width .15s;cursor:pointer}
+  .donut svg circle.seg:hover{stroke-width:21}
+  .donut svg{transform:rotate(-90deg);filter:drop-shadow(0 4px 16px rgba(0,0,0,0.5))}
+  .donut .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none}
+  .donut .center .amt{font-family:'Sora',sans-serif;font-size:42px;font-weight:800;letter-spacing:-1.5px;color:#fff;line-height:1;text-shadow:0 2px 24px rgba(140,188,230,0.4)}
+  .donut .center .lbl{font-size:10.5px;color:var(--baby-mid);font-weight:700;margin-top:6px;letter-spacing:2.5px;transition:color .2s}
+
+  .breakdown{background:rgba(255,255,255,0.05);border:1px solid var(--line);border-radius:22px;padding:6px 22px;margin-top:auto}
+  .row{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);transition:padding-left .15s}
+  .row:last-child{border-bottom:none}
+  .row:hover{padding-left:4px}
+  .row.hidden{display:none}
+  .dot{width:10px;height:10px;border-radius:50%;margin-right:13px;flex-shrink:0;box-shadow:0 0 10px currentColor}
+  .row .name{font-size:13px;color:var(--grey-soft);font-weight:600}
+  .row .val{margin-left:auto;font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:#fff}
+
+  .pmi-note{font-size:11px;color:var(--grey);margin-top:12px;line-height:1.5;padding:10px 14px;background:rgba(184,156,219,0.08);border:1px solid rgba(184,156,219,0.25);border-radius:12px}
+  .pmi-note b{color:var(--pmi)}
+
+
+  .lender{width:100%;margin-top:22px}
+  .lender .label{font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--baby-mid);font-weight:600;text-align:center;margin-bottom:12px}
+  .lender a.ad{display:block;border-radius:26px;overflow:hidden;text-decoration:none;border:1px solid var(--line-bright);position:relative;
+    box-shadow:0 16px 50px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.12);
+    transition:transform .25s cubic-bezier(.2,.7,.3,1), box-shadow .25s;background:#fff;max-width:520px;margin:0 auto;}
+  .lender a.ad:hover{transform:translateY(-4px);box-shadow:0 24px 70px rgba(90,150,204,0.4), inset 0 1px 0 rgba(255,255,255,0.12)}
+  .lender a.ad img{display:block;width:100%;height:auto}
+  .lender a.ad .hint{position:absolute;bottom:0;left:0;right:0;padding:12px;text-align:center;font-family:'Sora',sans-serif;font-weight:700;font-size:13px;color:#fff;letter-spacing:.3px;
+    background:linear-gradient(to top,rgba(10,15,23,0.92),rgba(10,15,23,0));opacity:0;transition:opacity .25s}
+  .lender a.ad:hover .hint{opacity:1}
+
+
+
+  /* EXTRA PAYMENT */
+  .extra-card{margin-top:14px;background:linear-gradient(135deg,rgba(127,199,182,0.10),rgba(255,255,255,0.04));
+    border:1px solid rgba(127,199,182,0.30);border-radius:18px;padding:18px 20px}
+  .extra-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+  .extra-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:#fff}
+  .extra-amt{font-family:'Sora',sans-serif;font-size:15px;font-weight:800;color:var(--ins)}
+  .extra-card input[type=range]{background:linear-gradient(90deg,#7fc7b6,#a9e0d2) no-repeat;background-size:var(--fill,0%) 100%;box-shadow:inset 0 0 0 100px rgba(255,255,255,0.08)}
+  .extra-card input[type=range]::-webkit-slider-thumb{background:radial-gradient(circle at 35% 30%,#fff,#7fc7b6 70%);box-shadow:0 2px 10px rgba(127,199,182,0.7)}
+  .extra-card input[type=range]::-moz-range-thumb{background:#7fc7b6}
+  .extra-results{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+  .extra-stat{text-align:center;background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:13px;padding:12px 6px}
+  .es-k{font-size:10px;color:var(--grey);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:5px}
+  .es-v{font-family:'Sora',sans-serif;font-size:17px;font-weight:800;color:#fff}
+  .es-v.save{color:var(--ins)}
+
+
+
+  /* BRAND BAR */
+  .brand-bar{width:100%;max-width:940px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:0 4px}
+  .brand-logo{height:46px;width:auto;filter:drop-shadow(0 2px 10px rgba(0,0,0,0.5))}
+  .brand-tag{font-family:'Sora',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--baby-mid)}
+  @media(max-width:560px){.brand-logo{height:38px}.brand-tag{font-size:10px}}
+
+
+
+
+  .header-logo{flex-shrink:0;display:flex;align-items:center;padding-left:18px;margin-left:4px;border-left:1px solid var(--line)}
+  .header-logo img{height:52px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4))}
+  @media(max-width:700px){.header-logo{border-left:none;padding-left:0;margin-left:0;margin-top:10px;width:100%;justify-content:flex-start}.header-logo img{height:42px}}
+
+
+  .fixed-logo{position:fixed;top:18px;right:84px;z-index:50;display:block;
+    background:rgba(14,20,29,0.55);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);
+    border:1px solid var(--line);border-radius:14px;padding:8px 14px;
+    box-shadow:0 6px 24px rgba(0,0,0,0.45);transition:transform .18s, box-shadow .18s}
+  .fixed-logo:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(90,150,204,0.4)}
+  .fixed-logo img{height:38px;width:auto;display:block;filter:drop-shadow(0 1px 4px rgba(0,0,0,0.4))}
+  @media(max-width:560px){.fixed-logo{top:96px;right:16px;padding:6px 10px}.fixed-logo img{height:28px}}
+
+
+  .box-logo{position:absolute;top:14px;right:18px;z-index:3;display:block;line-height:0}
+  .box-logo img{height:41.4px;width:auto;filter:drop-shadow(0 1px 4px rgba(0,0,0,0.45));opacity:.96;transition:opacity .15s}
+  .box-logo:hover img{opacity:1}
+  @media(max-width:700px){.box-logo{top:12px;right:12px}.box-logo img{height:33.1px}}
+
+
+  .install-banner{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:60;
+    width:calc(100% - 28px);max-width:520px;display:flex;align-items:center;gap:12px;
+    background:rgba(14,20,29,0.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border:1px solid var(--line-bright);border-radius:16px;padding:12px 14px;
+    box-shadow:0 12px 40px rgba(0,0,0,0.55)}
+  .install-banner.hide{display:none}
+  .ib-text{font-size:13px;color:var(--grey-soft);line-height:1.4;flex:1}
+  .ib-text b{color:#fff;font-family:'Sora',sans-serif}
+  .ib-btn{background:linear-gradient(135deg,var(--baby-deep),var(--baby-mid));border:none;color:#fff;
+    font-family:'Sora',sans-serif;font-weight:700;font-size:13px;padding:9px 16px;border-radius:11px;cursor:pointer;white-space:nowrap}
+  .ib-x{background:none;border:none;color:var(--grey);font-size:22px;line-height:1;cursor:pointer;padding:0 4px}
+  @media print{.install-banner{display:none!important}}
+
+  /* SONYMA */
+  .sonyma{width:100%;max-width:940px;margin-top:22px;display:flex;align-items:center;gap:18px;
+    text-decoration:none;color:inherit;
+    background:linear-gradient(135deg,rgba(90,150,204,0.16),var(--glass));
+    backdrop-filter:blur(26px) saturate(150%);-webkit-backdrop-filter:blur(26px) saturate(150%);
+    border:1px solid var(--line-bright);border-radius:22px;padding:18px 24px;
+    box-shadow:0 10px 44px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.10);
+    transition:transform .22s cubic-bezier(.2,.7,.3,1), box-shadow .22s, border-color .22s;}
+  .sonyma:hover{transform:translateY(-3px);border-color:var(--baby);box-shadow:0 18px 56px rgba(90,150,204,0.35), inset 0 1px 0 rgba(255,255,255,0.12)}
+  .sonyma-icon{width:54px;height:54px;border-radius:14px;flex-shrink:0;background:#fff;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;padding:7px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.35)}
+  .sonyma-icon img{width:100%;height:100%;object-fit:contain}
+
+  .sonyma-rates{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+  .rate-chip{font-size:11px;color:var(--grey-soft);background:rgba(255,255,255,0.06);border:1px solid var(--line);
+    border-radius:8px;padding:3px 9px;font-weight:600}
+  .rate-chip b{font-family:'Sora',sans-serif;color:var(--baby);font-weight:800;margin-right:3px}
+  .sonyma-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--baby-mid);font-weight:700;margin-bottom:2px}
+  .sonyma-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:800;color:#fff;letter-spacing:-.2px}
+  .sonyma-sub{font-size:12px;color:var(--grey);margin-top:3px}
+  .sonyma-arrow{margin-left:auto;font-family:'Sora',sans-serif;font-size:22px;color:var(--baby);font-weight:700;transition:transform .22s}
+  .sonyma:hover .sonyma-arrow{transform:translateX(4px)}
+  @media(max-width:560px){.sonyma{flex-wrap:wrap}.sonyma-arrow{display:none}}
+
+
+  /* PRINT */
+  @media print{
+    @page{size:letter;margin:0.5in}
+    body{background:#fff!important;color:#111!important;padding:0;display:block}
+    body::before,body::after{display:none!important}
+    .brand-tag{color:#555!important}
+    .brand-logo{filter:none!important}
+    .box-logo img{filter:none!important}
+    .mode-tabs,input[type=range],.dp-toggle,.lender .hint{display:none!important}
+    .stage{max-width:100%}
+    .calc{grid-template-columns:1fr 1fr;border:1px solid #ccc!important;box-shadow:none!important}
+    .inputs,.result{background:#fff!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;color:#111!important;border-color:#ddd!important}
+    .agent-bar,.sonyma{background:#f5f7fa!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border:1px solid #ddd!important;box-shadow:none!important}
+    .sec-title,.agent-meta h1,.donut .center .amt,.row .val,.stat .v,.es-v{color:#111!important;text-shadow:none!important}
+    .sec-label,.agent-meta .role,.field .pct{color:#2c6da3!important}
+    .agent-contact,.row .name,.es-k,.stat .k{color:#444!important}
+    .input-wrap{background:#fff!important;border:1px solid #ccc!important}
+    .input-wrap input{color:#111!important}
+    .breakdown,.stat,.amort-table{background:#fff!important}
+    .lender a.ad{box-shadow:none!important;border:1px solid #ddd!important}
+    .disclaimer{color:#666!important}
+  }
+
+  .disclaimer{max-width:700px;font-size:10.5px;color:var(--grey);line-height:1.6;margin-top:22px;text-align:center;padding:0 8px;opacity:.8}
+
+  @media(max-width:700px){
+    .calc{grid-template-columns:1fr}
+    .result{border-left:none;border-top:1px solid var(--line)}
+    .agent-bar{flex-wrap:wrap}
+    .agent-contact{margin-left:0;text-align:left;width:100%;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;margin-top:6px}
+    .terms button{padding:15px 0}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="install-banner" id="installBanner">
+  <div class="ib-text"><b>Add to your phone:</b> <span id="ibHow">tap Share, then "Add to Home Screen"</span></div>
+  <button class="ib-btn" id="ibInstall" style="display:none">Install</button>
+  <button class="ib-x" id="ibClose" aria-label="Dismiss">&times;</button>
 </div>
+<div class="stage">
+
+  <div class="agent-bar">
+    <a class="box-logo" href="https://maryjanepastorrealty.com" target="_blank" rel="noopener"><img src="mjp-logo.svg" alt="MJ Pastor Realty"></a>
+    <div class="agent-photo"><img src="dean.jpg" alt="Dean Nugent"></div>
+    <div class="agent-meta">
+      <div class="eyebrow">Your Agent</div>
+      <h1>Dean Nugent</h1>
+      <div class="firm"><b>MJ Pastor Realty</b> · Principal Broker / Owner · Hartsdale, NY</div>
+    </div>
+    <div class="agent-contact">
+      Office: <a href="tel:9146821799">914-682-1799</a><br>
+      <a href="mailto:Dean@mjpastorrealty.com">Dean@mjpastorrealty.com</a><br>
+      <a href="https://maryjanepastorrealty.com" target="_blank" rel="noopener">maryjanepastorrealty.com &rarr;</a>
+    </div>
+  </div>
+
+  <div class="mode-tabs" id="modeTabs">
+    <button data-mode="purchase" class="on">Purchase</button>
+    <button data-mode="refi">Refinance</button>
+  </div>
+
+  <div class="calc">
+    <div class="inputs">
+      <div class="sec-label" id="modeLabel">Estimate</div>
+      <div class="sec-title" id="modeTitle">Calculate your mortgage</div>
+
+      <!-- PURCHASE FIELDS -->
+      <div id="purchaseFields">
+        <div class="field">
+          <label>Home price</label>
+          <div class="input-wrap"><span class="cur">$</span><input type="text" id="homePrice" value="700,000" inputmode="numeric"></div>
+          <input type="range" id="homeRange" min="100000" max="2000000" step="1000" value="700000">
+        </div>
+        <div class="field">
+          <label>Down payment <span class="dp-toggle"><button id="dpDollar" class="on">$</button><button id="dpPercent">%</button></span></label>
+          <div class="input-wrap"><span class="cur" id="dpCur">$</span><input type="text" id="downPay" value="140,000" inputmode="numeric"><span class="suffix" id="dpPctView">20.00%</span></div>
+          <input type="range" id="downRange" min="0" max="1000000" step="500" value="140000">
+        </div>
+      </div>
+
+      <!-- REFI FIELDS -->
+      <div id="refiFields" style="display:none">
+        <div class="field">
+          <label>Property value</label>
+          <div class="input-wrap"><span class="cur">$</span><input type="text" id="propValue" value="700,000" inputmode="numeric"></div>
+          <input type="range" id="propRange" min="100000" max="2000000" step="1000" value="700000">
+        </div>
+        <div class="field">
+          <label>New loan amount <span class="pct" id="ltvView">80% LTV</span></label>
+          <div class="input-wrap"><span class="cur">$</span><input type="text" id="loanAmt" value="560,000" inputmode="numeric"></div>
+          <input type="range" id="loanRange" min="50000" max="2000000" step="1000" value="560000">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Length of loan <span>years</span></label>
+        <div class="terms" id="terms">
+          <button data-yr="30" class="active">30</button>
+          <button data-yr="20">20</button>
+          <button data-yr="15">15</button>
+          <button data-yr="10">10</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Interest rate <span class="pct" id="rateLbl">6.00%</span></label>
+        <div class="input-wrap"><input type="text" id="rate" value="6" inputmode="decimal"><span class="suffix">%</span></div>
+        <input type="range" id="rateRange" min="2" max="12" step="0.01" value="6">
+      </div>
+
+      <div class="divider"></div>
+      <div class="group-label">Costs &amp; escrow</div>
+      <div class="grid3">
+        <div class="field small">
+          <label>Property tax <span>/yr</span></label>
+          <div class="input-wrap sm"><span class="cur">$</span><input type="text" id="taxYr" value="12,000" inputmode="numeric"></div>
+        </div>
+        <div class="field small">
+          <label>Insurance <span>/yr</span></label>
+          <div class="input-wrap sm"><span class="cur">$</span><input type="text" id="insYr" value="2,100" inputmode="numeric"></div>
+        </div>
+        <div class="field small">
+          <label>HOA fees <span>/mo</span></label>
+          <div class="input-wrap sm"><span class="cur">$</span><input type="text" id="hoaMo" value="50" inputmode="numeric"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="result">
+      <div class="sec-label" style="color:var(--baby-mid)">Monthly payment</div>
+      <div class="donut-wrap">
+        <div class="donut">
+          <svg width="230" height="230" viewBox="0 0 230 230">
+            <circle cx="115" cy="115" r="92" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="17"/>
+            <circle id="segPI"  class="seg" cx="115" cy="115" r="92" fill="none" stroke="#6fa8d6" stroke-width="17" stroke-linecap="round" data-name="Principal & interest"></circle>
+            <circle id="segPMI" class="seg" cx="115" cy="115" r="92" fill="none" stroke="#b89cdb" stroke-width="17" stroke-linecap="round" data-name="PMI"></circle>
+            <circle id="segINS" class="seg" cx="115" cy="115" r="92" fill="none" stroke="#7fc7b6" stroke-width="17" stroke-linecap="round" data-name="Insurance"></circle>
+            <circle id="segTAX" class="seg" cx="115" cy="115" r="92" fill="none" stroke="#e08c9a" stroke-width="17" stroke-linecap="round" data-name="Property tax"></circle>
+            <circle id="segHOA" class="seg" cx="115" cy="115" r="92" fill="none" stroke="#e0c084" stroke-width="17" stroke-linecap="round" data-name="HOA fees"></circle>
+          </svg>
+          <div class="center"><div class="amt" id="totalPay">$4,077</div><div class="lbl" id="totalLbl">PER MONTH</div></div>
+        </div>
+      </div>
+      <div class="breakdown">
+        <div class="row"><span class="dot" style="background:var(--pi);color:var(--pi)"></span><span class="name">Principal &amp; interest</span><span class="val" id="piVal">$3,558</span></div>
+        <div class="row" id="rowPMI"><span class="dot" style="background:var(--pmi);color:var(--pmi)"></span><span class="name">PMI (mortgage insurance)</span><span class="val" id="pmiVal">$0</span></div>
+        <div class="row"><span class="dot" style="background:var(--ins);color:var(--ins)"></span><span class="name">Homeowner&#39;s insurance</span><span class="val" id="insVal">$67</span></div>
+        <div class="row"><span class="dot" style="background:var(--tax);color:var(--tax)"></span><span class="name">Property tax</span><span class="val" id="taxVal">$402</span></div>
+        <div class="row"><span class="dot" style="background:var(--hoa);color:var(--hoa)"></span><span class="name">HOA fees</span><span class="val" id="hoaVal">$50</span></div>
+      </div>
+
+      <div class="pmi-note" id="pmiNote" style="display:none"></div>
+
+    </div>
+  </div>
+
+  <a class="sonyma" href="https://hcr.ny.gov/current-rates" target="_blank" rel="noopener">
+    <div class="sonyma-icon"><img src="ny-state.png" alt="New York State"></div>
+    <div class="sonyma-text">
+      <div class="sonyma-eyebrow">NY First-Time Buyer</div>
+      <div class="sonyma-title">Check current SONYMA rates &amp; programs</div>
+      <div class="sonyma-rates">
+        <span class="rate-chip"><b>5.70%</b> Achieving the Dream</span>
+        <span class="rate-chip"><b>6.00%</b> Low Interest Rate</span>
+      </div>
+      <div class="sonyma-sub">30-yr fixed · 0 points · up to 97% financing · tap for live official rates</div>
+    </div>
+    <div class="sonyma-arrow">&rarr;</div>
+  </a>
+
+  <div class="lender">
+    <div class="label">Financing by</div>
+    <a class="ad" href="https://movement.com/lo/robert-castro" target="_blank" rel="noopener">
+      <img src="movement-ad.jpg" alt="Robert Castro Sr. — Movement Mortgage. Ready to buy a home? Click here.">
+      <div class="hint">Tap to get pre-approved &rarr;</div>
+    </a>
+  </div>
+
+  <p class="disclaimer">
+    Estimates are for illustrative purposes only and do not constitute a loan commitment, pre-approval, or offer to lend.
+    PMI rates shown are estimates based on loan-to-value and the selected credit tier; actual mortgage insurance, rates, taxes, and insurance vary by lender, program, and borrower.
+    PMI typically applies when the down payment is under 20% and can usually be removed once 20% equity is reached. Refinance figures exclude closing costs.
+    Contact Robert A. Castro Sr. (NMLS #66194), Movement Mortgage, for an accurate, personalized estimate. Equal Housing Lender.
+  </p>
+</div>
+
 <script>
-const $=s=>document.getElementById(s);
-const num=s=>parseFloat(String(s).replace(/[^0-9.]/g,''))||0;
-const money=n=>'$'+Math.round(n).toLocaleString();
-function fmtThousands(el){let c=el.selectionStart,raw=el.value.replace(/[^0-9]/g,'');if(raw){el.value=Number(raw).toLocaleString();}}
-['price','tax','ins','hoa'].forEach(id=>$(id).addEventListener('input',e=>{fmtThousands(e.target);calc();}));
-$('rate').addEventListener('input',calc);
-$('down').addEventListener('input',calc);
-let term=30;
-document.querySelectorAll('#term button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#term button').forEach(x=>x.classList.remove('on'));b.classList.add('on');term=+b.dataset.y;calc();});
-const COL={pi:'#f0c14b',tax:'#6db1ff',ins:'#7fd8b0',hoa:'#b79cff',pmi:'#ff9b9b'};
-function calc(){
-  const price=num($('price').value), downPct=+$('down').value;
-  const down=price*downPct/100, loan=price-down;
-  const r=num($('rate').value)/100/12, n=term*12;
-  const pi = r>0 ? loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1) : loan/n;
-  const tax=num($('tax').value)/12, ins=num($('ins').value)/12, hoa=num($('hoa').value);
-  const pmi = downPct<20 ? loan*0.005/12 : 0;
-  const total=pi+tax+ins+hoa+pmi;
-  $('priceV').textContent=money(price);
-  $('downV').textContent=downPct+'% · '+money(down);
-  $('rateV').textContent=(num($('rate').value)||0)+'%';
-  $('total').innerHTML=money(total)+' <small>/mo</small>';
-  $('pmiTip').textContent = downPct<20 ? 'Includes est. PMI ('+money(pmi)+'/mo) — drops off near 20% equity.' : 'No PMI — 20%+ down. Loan amount: '+money(loan);
-  const parts=[['P&I',pi,COL.pi],['Taxes',tax,COL.tax],['Insurance',ins,COL.ins],['HOA',hoa,COL.hoa],['PMI',pmi,COL.pmi]].filter(p=>p[1]>0);
-  $('bar').innerHTML=parts.map(p=>`<div class="seg" style="width:${p[1]/total*100}%;background:${p[2]}"></div>`).join('');
-  $('legend').innerHTML=parts.map(p=>`<span><span class="dot" style="background:${p[2]}"></span>${p[0]} ${money(p[1])}</span>`).join('');
-}
-calc();
-</script></body></html>
+  const $=id=>document.getElementById(id);
+  const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const num=s=>parseFloat(String(s).replace(/[^0-9.]/g,''))||0;
+
+  let state={
+    mode:'purchase',
+    price:700000, down:140000,
+    propValue:700000, loanAmt:560000,
+    years:30, rate:6, dpMode:'dollar',
+    taxYr:12000, insYr:2100, hoaMo:50, credit:'excellent'
+  };
+
+  // PMI annual rate (% of loan) by LTV band and credit tier — estimates
+  function pmiRate(ltv){
+    if(ltv<=80) return 0;
+    // Estimated PMI for excellent credit (760+)
+    if(ltv<=85) return 0.0019;
+    if(ltv<=90) return 0.0023;
+    if(ltv<=95) return 0.0041;
+    return 0.0058;
+  }
+
+  const animState={};
+  function animateTo(el,target){
+    const key=el.id;const start=animState[key]!=null?animState[key]:target;
+    const t0=performance.now(),dur=420;
+    function step(now){const p=Math.min((now-t0)/dur,1);const e=1-Math.pow(1-p,3);
+      el.textContent=fmt(start+(target-start)*e);
+      if(p<1)requestAnimationFrame(step);else animState[key]=target;}
+    animState[key]=start;requestAnimationFrame(step);
+  }
+
+  function loanAndValue(){
+    if(state.mode==='purchase'){
+      return {loan:Math.max(state.price-state.down,0), value:state.price};
+    }
+    return {loan:state.loanAmt, value:state.propValue};
+  }
+
+  function schedule(loan){
+    const r=state.rate/100/12,n=state.years*12;
+    let pi=r>0?loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):loan/n;
+    let bal=loan,rows=[],spark=[loan],totInt=0;
+    for(let y=1;y<=state.years;y++){
+      let pPaid=0,iPaid=0;
+      for(let m=0;m<12;m++){const i=bal*r;const pr=pi-i;bal-=pr;pPaid+=pr;iPaid+=i;totInt+=i;if(bal<0)bal=0;}
+      rows.push({y,p:pPaid,i:iPaid,bal});spark.push(bal);
+    }
+    return {pi,rows,spark,totInt};
+  }
+
+
+
+
+  function calc(){
+    const {loan,value}=loanAndValue();
+    const ltv=value>0?loan/value*100:0;
+    const {pi,rows,spark,totInt}=schedule(loan);
+    const ins=state.insYr/12, tax=state.taxYr/12, hoa=state.hoaMo;
+    const pmiR=pmiRate(ltv);
+    const pmi=loan*pmiR/12;
+    const total=pi+pmi+ins+tax+hoa;
+
+    animateTo($('piVal'),pi);animateTo($('pmiVal'),pmi);
+    animateTo($('insVal'),ins);animateTo($('taxVal'),tax);animateTo($('hoaVal'),hoa);
+    animateTo($('totalPay'),total);
+
+    // PMI row + note
+    if(pmi>0){
+      $('rowPMI').classList.remove('hidden');$('segPMI').style.display='';
+      $('pmiNote').style.display='';
+      const dropPct=20;
+      $('pmiNote').innerHTML='<b>PMI applies</b> at '+ltv.toFixed(1)+'% LTV (excellent credit, ~'+(pmiR*100).toFixed(2)+'%/yr). Drops off near '+dropPct+'% equity &mdash; reaching it removes about '+fmt(pmi)+'/mo.';
+    } else {
+      $('rowPMI').classList.add('hidden');$('segPMI').style.display='none';
+      $('pmiNote').style.display='none';
+    }
+
+    // donut
+    const C=2*Math.PI*92;
+    const parts=[['segPI',pi],['segPMI',pmi],['segINS',ins],['segTAX',tax],['segHOA',hoa]];
+    let off=0;parts.forEach(([id,v])=>{const f=total>0?v/total:0;const s=$(id);
+      s.setAttribute('stroke-dasharray',(Math.max(f*C-2,0))+' '+C);
+      s.setAttribute('stroke-dashoffset',-off*C);off+=f;});
+
+    // dp percent / ltv view
+    if(state.mode==='purchase'){
+      const dp=state.price>0?(state.down/state.price*100):0;
+      $('dpPctView').textContent=dp.toFixed(2)+'%';
+    } else {
+      $('ltvView').textContent=ltv.toFixed(0)+'% LTV';
+    }
+
+  }
+
+
+  function fillRange(el){const p=(el.value-el.min)/(el.max-el.min)*100;el.style.setProperty('--fill',p+'%');}
+
+  // donut hover
+  document.querySelectorAll('.donut .seg').forEach(s=>{
+    s.addEventListener('mouseenter',()=>{$('totalLbl').textContent=s.dataset.name.toUpperCase();$('totalLbl').style.color='var(--baby)';});
+    s.addEventListener('mouseleave',()=>{$('totalLbl').textContent='PER MONTH';$('totalLbl').style.color='';});
+  });
+
+  // mode tabs
+  document.querySelectorAll('#modeTabs button').forEach(b=>{b.addEventListener('click',()=>{
+    document.querySelectorAll('#modeTabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+    state.mode=b.dataset.mode;
+    if(state.mode==='refi'){
+      $('purchaseFields').style.display='none';$('refiFields').style.display='';
+      $('modeLabel').textContent='Refinance';$('modeTitle').textContent='Estimate your refinance';
+    } else {
+      $('purchaseFields').style.display='';$('refiFields').style.display='none';
+      $('modeLabel').textContent='Estimate';$('modeTitle').textContent='Calculate your mortgage';
+    }
+    calc();
+  });});
+
+  // purchase inputs
+  $('homePrice').addEventListener('input',e=>{state.price=num(e.target.value);$('homeRange').value=Math.min(state.price,2000000);fillRange($('homeRange'));calc();});
+  $('homePrice').addEventListener('blur',e=>{e.target.value=state.price.toLocaleString('en-US');});
+  $('homeRange').addEventListener('input',e=>{state.price=+e.target.value;$('homePrice').value=state.price.toLocaleString('en-US');fillRange(e.target);calc();});
+
+  function syncDownField(){
+    if(state.dpMode==='dollar'){$('dpCur').style.display='';$('dpPctView').style.display='';$('downPay').value=state.down.toLocaleString('en-US');}
+    else{$('dpCur').style.display='none';$('dpPctView').style.display='none';const pct=state.price>0?state.down/state.price*100:0;$('downPay').value=pct.toFixed(2);}
+  }
+  $('downPay').addEventListener('input',e=>{
+    if(state.dpMode==='dollar'){state.down=num(e.target.value);}else{state.down=state.price*num(e.target.value)/100;}
+    $('downRange').value=Math.min(state.down,1000000);fillRange($('downRange'));calc();});
+  $('downPay').addEventListener('blur',syncDownField);
+  $('downRange').addEventListener('input',e=>{state.down=+e.target.value;syncDownField();fillRange(e.target);calc();});
+  $('dpDollar').addEventListener('click',()=>{state.dpMode='dollar';$('dpDollar').classList.add('on');$('dpPercent').classList.remove('on');syncDownField();});
+  $('dpPercent').addEventListener('click',()=>{state.dpMode='percent';$('dpPercent').classList.add('on');$('dpDollar').classList.remove('on');syncDownField();});
+
+  // refi inputs
+  $('propValue').addEventListener('input',e=>{state.propValue=num(e.target.value);$('propRange').value=Math.min(state.propValue,2000000);fillRange($('propRange'));calc();});
+  $('propValue').addEventListener('blur',e=>{e.target.value=state.propValue.toLocaleString('en-US');});
+  $('propRange').addEventListener('input',e=>{state.propValue=+e.target.value;$('propValue').value=state.propValue.toLocaleString('en-US');fillRange(e.target);calc();});
+  $('loanAmt').addEventListener('input',e=>{state.loanAmt=num(e.target.value);$('loanRange').value=Math.min(state.loanAmt,2000000);fillRange($('loanRange'));calc();});
+  $('loanAmt').addEventListener('blur',e=>{e.target.value=state.loanAmt.toLocaleString('en-US');});
+  $('loanRange').addEventListener('input',e=>{state.loanAmt=+e.target.value;$('loanAmt').value=state.loanAmt.toLocaleString('en-US');fillRange(e.target);calc();});
+
+  // term, rate
+  document.querySelectorAll('#terms button').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('#terms button').forEach(x=>x.classList.remove('active'));b.classList.add('active');state.years=+b.dataset.yr;calc();});});
+  $('rate').addEventListener('input',e=>{state.rate=num(e.target.value);$('rateLbl').textContent=state.rate.toFixed(2)+'%';$('rateRange').value=Math.min(Math.max(state.rate,2),12);fillRange($('rateRange'));calc();});
+  $('rate').addEventListener('blur',e=>{e.target.value=state.rate;});
+  $('rateRange').addEventListener('input',e=>{state.rate=+e.target.value;$('rate').value=state.rate;$('rateLbl').textContent=state.rate.toFixed(2)+'%';fillRange(e.target);calc();});
+
+  // costs
+  $('taxYr').addEventListener('input',e=>{state.taxYr=num(e.target.value);calc();});
+  $('taxYr').addEventListener('blur',e=>{e.target.value=state.taxYr.toLocaleString('en-US');});
+  $('insYr').addEventListener('input',e=>{state.insYr=num(e.target.value);calc();});
+  $('insYr').addEventListener('blur',e=>{e.target.value=state.insYr.toLocaleString('en-US');});
+  $('hoaMo').addEventListener('input',e=>{state.hoaMo=num(e.target.value);calc();});
+  $('hoaMo').addEventListener('blur',e=>{e.target.value=state.hoaMo.toLocaleString('en-US');});
+
+
+  // ---- PWA install + service worker ----
+  if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
+  (function(){
+    const banner=document.getElementById('installBanner');
+    const how=document.getElementById('ibHow');
+    const btn=document.getElementById('ibInstall');
+    const x=document.getElementById('ibClose');
+    const isStandalone=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+    if(isStandalone){banner.classList.add('hide');return;}
+    if(localStorage.getItem('mjpInstallDismissed')==='1'){banner.classList.add('hide');}
+    const ua=navigator.userAgent||'';
+    const isIOS=/iphone|ipad|ipod/i.test(ua);
+    const isAndroid=/android/i.test(ua);
+    if(isIOS){how.textContent='tap the Share icon, then "Add to Home Screen"';}
+    else if(isAndroid){how.textContent='tap the menu (\u22ee), then "Add to Home screen"';}
+    else{how.textContent='open this on your phone, then add it to your home screen';}
+    let deferred=null;
+    window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferred=e;btn.style.display='';how.textContent='one tap to install this as an app';});
+    btn.addEventListener('click',async()=>{if(deferred){deferred.prompt();await deferred.userChoice;deferred=null;banner.classList.add('hide');}});
+    x.addEventListener('click',()=>{banner.classList.add('hide');localStorage.setItem('mjpInstallDismissed','1');});
+  })();
+
+  ['homeRange','downRange','propRange','loanRange','rateRange'].forEach(id=>fillRange($(id)));
+  calc();
+</script>
+</body>
+</html>
